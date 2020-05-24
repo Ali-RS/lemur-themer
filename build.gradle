@@ -1,0 +1,64 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+group 'com.jayfella'
+version '0.0.1'
+
+repositories {
+    mavenLocal()
+    jcenter()
+
+    maven { url  "https://dl.bintray.com/stephengold/org.jmonkeyengine" }
+}
+
+java {
+    withSourcesJar()
+    withJavadocJar()
+}
+
+configurations {
+    releaseJar.extendsFrom implementation
+}
+
+ext {
+    jmeVersion = "3.3.2-stable"
+    version_jackson = "2.11.0"
+}
+
+dependencies {
+    compileOnly "org.jmonkeyengine:jme3-core:$jmeVersion"
+    compileOnly "org.jmonkeyengine:jme3-lwjgl:$jmeVersion"
+    compileOnly "org.jmonkeyengine:jme3-desktop:$jmeVersion"
+    compileOnly "org.jmonkeyengine:jme3-plugins:$jmeVersion"
+
+
+    compileOnly "com.simsilica:lemur:1.14.0-SNAPSHOT"
+    compileOnly "com.simsilica:lemur-proto:1.11.0"
+
+    implementation "com.fasterxml.jackson.core:jackson-core:$version_jackson"
+    implementation "com.fasterxml.jackson.core:jackson-databind:$version_jackson"
+    implementation "com.fasterxml.jackson.core:jackson-annotations:$version_jackson"
+
+    implementation "com.jayfella:devkit-propertyinspector-plugin:1.0.0"
+    implementation "org.reflections:reflections:0.9.11"
+}
+
+jar {
+    from configurations.releaseJar.collect { it.isDirectory() ? it : zipTree(it) }
+}
