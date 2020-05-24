@@ -9,6 +9,7 @@ Themes are saved in `JSON` format.
 
 Themes are loaded using the `setTheme(String)` or `setTheme(File)` methods.
 Themes are saved using the `saveActiveTheme()` method.
+If the theme does not exist one will be created and populated by the default glass theme.
 
 ```java
 public class TestThemeLoading extends SimpleApplication {
