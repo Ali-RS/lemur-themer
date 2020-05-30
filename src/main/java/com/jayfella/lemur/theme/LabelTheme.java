@@ -8,12 +8,12 @@ import com.simsilica.lemur.Label;
 
 public class LabelTheme extends ThemedElement {
 
-    private ColorRGBA color = new ColorRGBA(0.5f, 0.75f, 0.75f, 0.85f);
-    private Insets3f insets = new Insets3f(2, 2, 2, 2);
+    protected ColorRGBA color = new ColorRGBA(0.5f, 0.75f, 0.75f, 0.85f);
+    protected Insets3f insets = new Insets3f(2, 2, 2, 2);
 
-    private boolean textShadow = false;
-    private ColorRGBA shadowColor = new ColorRGBA(0.0f, 0.0f, 0.0f, 1.0f);
-    private Vector3f shadowOffset = new Vector3f(2, -2, -1);
+    protected boolean textShadow = false;
+    protected ColorRGBA shadowColor = new ColorRGBA(0.0f, 0.0f, 0.0f, 1.0f);
+    protected Vector3f shadowOffset = new Vector3f(2, -2, -1);
 
     public LabelTheme() {
         super(Label.ELEMENT_ID);

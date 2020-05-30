@@ -10,13 +10,13 @@ import com.simsilica.lemur.core.GuiComponent;
 
 public class CheckboxTheme extends ButtonTheme {
 
-    private ColorRGBA color = new ColorRGBA(0.8f, 0.9f, 1.0f, 0.85f);
+    protected ColorRGBA color = new ColorRGBA(0.8f, 0.9f, 1.0f, 0.85f);
 
     @JsonTypeInfo( use = JsonTypeInfo.Id.CLASS)
-    private GuiComponent background = new QuadBackgroundComponent(new ColorRGBA(0, 0, 0, 0));
+    protected GuiComponent background = new QuadBackgroundComponent(new ColorRGBA(0, 0, 0, 0));
 
-    private IconComponent onView = IconComponents.defaultCheckBoxIcon(true);
-    private IconComponent offView = IconComponents.defaultCheckBoxIcon(false);
+    protected IconComponent onView = IconComponents.defaultCheckBoxIcon(true);
+    protected IconComponent offView = IconComponents.defaultCheckBoxIcon(false);
 
     public CheckboxTheme() {
         super(Checkbox.ELEMENT_ID);

@@ -10,16 +10,16 @@ import com.simsilica.lemur.core.GuiComponent;
 
 public class TitleTheme extends ThemedElement {
 
-    private ColorRGBA color = new ColorRGBA(0.8f, 0.9f, 1.0f, 0.85f);
-    private ColorRGBA highlightColor = new ColorRGBA(1.0f, 0.8f, 1.0f, 0.85f);
-    private ColorRGBA shadowColor = new ColorRGBA(0.0f, 0.0f, 0.0f, 0.75f);
+    protected ColorRGBA color = new ColorRGBA(0.8f, 0.9f, 1.0f, 0.85f);
+    protected ColorRGBA highlightColor = new ColorRGBA(1.0f, 0.8f, 1.0f, 0.85f);
+    protected ColorRGBA shadowColor = new ColorRGBA(0.0f, 0.0f, 0.0f, 0.75f);
 
-    private Vector3f shadowOffset = new Vector3f(2, -2, -1);
+    protected Vector3f shadowOffset = new Vector3f(2, -2, -1);
 
     @JsonTypeInfo( use = JsonTypeInfo.Id.CLASS)
-    private GuiComponent background = BackgroundComponents.doubleGradient(new ColorRGBA(0.5f, 0.75f, 0.85f, 0.5f));
+    protected GuiComponent background = BackgroundComponents.doubleGradient(new ColorRGBA(0.5f, 0.75f, 0.85f, 0.5f));
 
-    private Insets3f insets = new Insets3f(2,2,2,2);
+    protected Insets3f insets = new Insets3f(2,2,2,2);
 
     public TitleTheme() {
         super("title");

@@ -8,14 +8,14 @@ import com.simsilica.lemur.core.GuiComponent;
 
 public class ButtonTheme extends LabelTheme {
 
-    private ColorRGBA color = new ColorRGBA(0.8f, 0.9f, 1.0f, 0.85f);
-    private ColorRGBA focusColor = ColorRGBA.Green.clone();
-    private ColorRGBA highlightColor = ColorRGBA.Yellow.clone();
+    protected ColorRGBA color = new ColorRGBA(0.8f, 0.9f, 1.0f, 0.85f);
+    protected ColorRGBA focusColor = ColorRGBA.Green.clone();
+    protected ColorRGBA highlightColor = ColorRGBA.Yellow.clone();
 
     @JsonTypeInfo( use = JsonTypeInfo.Id.CLASS)
-    private GuiComponent background = BackgroundComponents.gradient(new ColorRGBA(0.0f, 0.75f, 0.75f, 0.5f));
+    protected GuiComponent background = BackgroundComponents.gradient(new ColorRGBA(0.0f, 0.75f, 0.75f, 0.5f));
 
-    private Insets3f insets = new Insets3f(2, 2, 2, 2);
+    protected Insets3f insets = new Insets3f(2, 2, 2, 2);
 
     public ButtonTheme() {
         super("button");
