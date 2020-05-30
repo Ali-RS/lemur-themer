@@ -94,6 +94,8 @@ public class LemurThemer {
         long end = System.currentTimeMillis();
         log.info("Took " + (end - start) + " milliseconds to find " +  classes.size() + " theme classes.");
 
+        log.debug("Found ThemedElements: " + classes.toString());
+
         for (Class<? extends ThemedElement> elementClass : classes) {
 
             try {
