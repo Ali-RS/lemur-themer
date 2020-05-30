@@ -22,4 +22,8 @@ public class CheckboxTheme extends ButtonTheme {
         super(Checkbox.ELEMENT_ID);
     }
 
+    public CheckboxTheme(String elementId) {
+        super(elementId);
+    }
+
 }
