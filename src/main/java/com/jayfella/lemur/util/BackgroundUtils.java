@@ -32,7 +32,7 @@ public class BackgroundUtils {
         return null;
     }
 
-    public void setBackgroundColor(GuiComponent guiComponent, ColorRGBA color) {
+    public static void setBackgroundColor(GuiComponent guiComponent, ColorRGBA color) {
 
         if (guiComponent instanceof QuadBackgroundComponent) {
             QuadBackgroundComponent backgroundComponent = (QuadBackgroundComponent) guiComponent;
