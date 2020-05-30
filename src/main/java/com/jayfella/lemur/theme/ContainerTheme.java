@@ -16,5 +16,8 @@ public class ContainerTheme extends ThemedElement {
         super(Container.ELEMENT_ID);
     }
 
+    public ContainerTheme(String elementId) {
+        super(elementId);
+    }
 
 }
