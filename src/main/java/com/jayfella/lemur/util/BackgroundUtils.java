@@ -32,4 +32,17 @@ public class BackgroundUtils {
         return null;
     }
 
+    public void setBackgroundColor(GuiComponent guiComponent, ColorRGBA color) {
+
+        if (guiComponent instanceof QuadBackgroundComponent) {
+            QuadBackgroundComponent backgroundComponent = (QuadBackgroundComponent) guiComponent;
+            backgroundComponent.setColor(color);
+        }
+        else if (guiComponent instanceof TbtQuadBackgroundComponent) {
+            TbtQuadBackgroundComponent backgroundComponent = (TbtQuadBackgroundComponent) guiComponent;
+            backgroundComponent.setColor(color);
+        }
+
+    }
+
 }
