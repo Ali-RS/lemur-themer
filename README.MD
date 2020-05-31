@@ -61,7 +61,8 @@ public class TestThemeLoading extends SimpleApplication {
 Users that have created custom GUI elements can also have them themed. To theme a custom element create a `class` that
 extends `ThemedElement`. If your element extends an existing element, extend that `ThemedElement` too. For example if
 your element extends `Label` then your ThemedElement should extend `LabelTheme`. This will give it all of the properties
-of a label to theme. Below is an example of the built-in `ButtonTheme` that extends `LabelTheme`.
+of the label theme in addition to your custom properties. Below is an example of the built-in `ButtonTheme` that extends
+`LabelTheme`.
 
 ```java
 public class ButtonTheme extends LabelTheme {
@@ -110,9 +111,6 @@ to store the fully-qualified class name.
 ### Theme Packages
 Lemur-Themer scans for classes that extend ThemedElement and applies the theme automatically. Scanning the entire
 classpath can take a considerable amount of time in large projects or low-power devices such as a mobile device or
-raspberry Pi. To alleviate this issue the user **must specify the parent package** to scan for any custom ThemedElement
-classes in the LemurThemer constructor.
+raspberry Pi. To alleviate this issue the user **must place their theme classes in the** `com.jayfella.lemur.theme`
+package.
 
-```java
-LemurThemer lemurThemer = new LemurThemer("my.theme.package");
-```
