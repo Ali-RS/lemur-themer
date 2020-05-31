@@ -38,13 +38,7 @@ public class LemurThemer {
     private File activeThemeFile;
     private final LemurTheme activeTheme = new LemurTheme();
 
-    private final String[] packagesToScan;
-
-    public LemurThemer(String... themePackages) {
-
-        packagesToScan = new String[themePackages.length + 1];
-        packagesToScan[0] = "com.jayfella.lemur.theme";
-        System.arraycopy(themePackages, 0, packagesToScan, 1, themePackages.length);
+    public LemurThemer() {
 
         objectMapper = new ObjectMapper()
                 .enable(SerializationFeature.INDENT_OUTPUT)
@@ -75,19 +69,21 @@ public class LemurThemer {
         // findThemeClasses();
     }
 
+    /**
+     * Creates a new instance of all detected classes that extend ThemedElement.
+     * @return a Map<themedElement.getClass().getSimpleName(), ThemedElement>
+     */
     private Map<String, ThemedElement> createNewThemeClasses() {
 
         Map<String, ThemedElement> themedElementMap = new HashMap<>();
 
-        // Add all the default lemur elements.
         log.info("Searching for theme classes...");
         long start = System.currentTimeMillis();
 
-        // Scanning all packages take a LONG time.
-        // To alleviate this we specify specific packages to search through.
+        // Scanning all packages take a LONG time. To alleviate this we specify specific packages to search through.
         Reflections reflections = new Reflections(
                 new ConfigurationBuilder()
-                    .forPackages(packagesToScan));
+                    .forPackages("com.jayfella.lemur.theme"));
 
         Set<Class<? extends ThemedElement>> classes = reflections.getSubTypesOf(ThemedElement.class);
 
@@ -113,12 +109,23 @@ public class LemurThemer {
         return themedElementMap;
     }
 
+    /**
+     * Sets the theme to the given file.
+     *
+     * @param themeFile The string representation of the path to the file. E.g. "./themes/mytheme.lemur.json".
+     */
     public void setTheme(String themeFile) {
         setTheme(new File(themeFile));
     }
 
+    /**
+     * Sets the theme to the given file.
+     *
+     * @param themeFile The theme file. E.g. new File("./themes/mytheme.lemur.json").
+     */
     public void setTheme(File themeFile) {
 
+        //
         Map<String, ThemedElement> themedElementMap = createNewThemeClasses();
 
         if (!themeFile.exists()) {
@@ -151,6 +158,9 @@ public class LemurThemer {
         applyTheme();
     }
 
+    /**
+     * Saves all changes made to the active theme.
+     */
     public void saveActiveTheme() {
 
         if (activeThemeFile == null) {
@@ -165,17 +175,26 @@ public class LemurThemer {
 
     }
 
+    /**
+     * Returns the currently active theme, or NULL if there is no active theme.
+     *
+     * @return the currently active theme, or NULL if there is no active theme.
+     */
     public LemurTheme getActiveTheme() {
         return activeTheme;
     }
 
+    /**
+     * Returns the file of the currently active theme, or NULL if there is no active theme.
+     * @return the currently active theme, or NULL if there is no active theme.
+     */
     public File getActiveThemeFile() {
         return activeThemeFile;
     }
 
     /**
-     * Applies all values of the active theme.
-     *
+     * Applies all values of the active theme to the Lemur theming system.
+     * Changes will only affect newly created Lemur Elements.
      */
     public void applyTheme() {
 
@@ -257,8 +276,8 @@ public class LemurThemer {
 
     /**
      * Searches the given fields of a class to check if text shadowing is enabled.
-     * @param fields
-     * @return
+     * @param fields the fields to scan.
+     * @return whether or not a field names "textShadow" exists and has been set to true.
      */
     private boolean textShadowEnabled(Collection<Field> fields, Object parent) {
 
