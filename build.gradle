@@ -15,7 +15,7 @@ publishing {
 }
 
 sourceCompatibility = 1.8
-targetCompatibility = 1.8
+// targetCompatibility = 1.8
 
 group 'com.jayfella'
 version '0.0.2'
@@ -55,7 +55,7 @@ dependencies {
     implementation "com.fasterxml.jackson.core:jackson-databind:$version_jackson"
     implementation "com.fasterxml.jackson.core:jackson-annotations:$version_jackson"
 
-    implementation "com.jayfella:devkit-propertyinspector-plugin:1.0.0"
+    implementation "com.jayfella:property-inspector:1.0.0"
     implementation "org.reflections:reflections:0.9.11"
 }
 
