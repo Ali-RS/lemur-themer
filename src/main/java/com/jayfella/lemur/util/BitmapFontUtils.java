@@ -10,12 +10,108 @@ import com.jme3.texture.Texture;
 import com.simsilica.lemur.GuiGlobals;
 import com.simsilica.lemur.core.GuiMaterial;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Base64;
 
 public class BitmapFontUtils {
 
     public static BitmapFont fromAngelFont(AngelFont angelFont) {
         return load(angelFont.getBase64Font(), angelFont.getBase64Images());
+    }
+
+    public static AngelFont load(File fntFile) {
+
+        byte[] fntFileRawData = null;
+
+        try {
+            fntFileRawData = Files.readAllBytes(fntFile.toPath());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        String[] images = extractImagesFromFontFile(fntFile);
+        String base64Fnt = Base64.getEncoder().encodeToString(fntFileRawData);
+
+        // return load(base64Fnt, images);
+        return new AngelFont(base64Fnt, images);
+    }
+
+    private static String[] extractImagesFromFontFile(File fntFile) {
+
+        String fntFileString;
+
+        try {
+            fntFileString = new String(Files.readAllBytes(fntFile.toPath()));
+        } catch (IOException e) {
+            e.printStackTrace();
+            return new String[0];
+        }
+
+        File baseFolder = fntFile.getParentFile();
+
+        String[] imageData = new String[0];
+        String regex = "[\\s=]+";
+        String[] lines = fntFileString.split("\n");
+
+        for (String line : lines) {
+
+            String[] tokens = line.split(regex);
+
+            if (tokens[0].equals("common")){
+                // Fill out BitmapCharacterSet fields
+                for (int i = 1; i < tokens.length; i++){
+
+                    String token = tokens[i];
+
+                    if (token.equals("pages")){
+                        // number of texture pages
+                        imageData = new String[Integer.parseInt(tokens[i + 1])];
+                    }
+                }
+            }
+
+            else if (tokens[0].equals("page")) {
+
+                int index = -1;
+                Texture tex = null;
+
+                for (int i = 1; i < tokens.length; i++){
+
+                    String token = tokens[i];
+
+                    if (token.equals("id")){
+                        index = Integer.parseInt(tokens[i + 1]);
+
+                    } else if (token.equals("file")){
+
+                        String file = tokens[i + 1];
+
+                        if (file.startsWith("\"")){
+                            file = file.substring(1, file.length()-1);
+                        }
+
+                        Path imagePath = Paths.get(baseFolder.toString(), file);
+
+                        try {
+                            byte[] imgBytes = Files.readAllBytes(imagePath);
+                            imageData[index] = Base64.getEncoder().encodeToString(imgBytes);
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                }
+
+            }
+
+        }
+
+        return imageData;
     }
 
     public static BitmapFont load(String bas64Fnt, String... base64Images) {
