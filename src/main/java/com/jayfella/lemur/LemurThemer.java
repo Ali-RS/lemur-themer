@@ -4,10 +4,10 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import com.jayfella.devkit.props.reflection.ReflectedFields;
 import com.jayfella.lemur.json.*;
 import com.jayfella.lemur.theme.font.AngelFont;
 import com.jayfella.lemur.util.BitmapFontUtils;
+import com.jayfella.properties.reflection.ReflectedFields;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
 import com.simsilica.lemur.GuiGlobals;
@@ -27,7 +27,10 @@ import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 public class LemurThemer {
 
